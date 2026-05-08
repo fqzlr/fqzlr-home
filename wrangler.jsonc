@@ -1,8 +1,0 @@
-{
-  "name": "fqzlr-home",
-  "compatibility_date": "2026-05-08",
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS"
-  }
-}
