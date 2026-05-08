@@ -23,7 +23,7 @@
   ],
   blog: { //跳转博客相关配置
     url: 'https://www.fqzlr.com',
-    rssFeed: 'https://fqzlr.com/rss.xml',
+    rssFeed: 'https://www.fqzlr.com/rss.xml',
     randomCoverApi: 'https://rand.xscnet.cn/mix' //随机封面API（可选，文章列表会使用这个接口获取随机封面图）
   },
   github: {
