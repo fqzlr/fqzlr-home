@@ -1,4 +1,0 @@
-name = "fqzlr-home"
-main = "dist/_worker.js/index.js"
-compatibility_date = "2024-05-01"
-workers_dev = true

@@ -1,35 +1,33 @@
-import manifest from './dist/_worker.js/manifest.js'
-import { createRequire } from 'module'
-const require = createRequire(import.meta.url)
-const assets = require('./dist/_worker.js/assets.mjs')
-
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url)
-    const path = url.pathname
+    const url = new URL(request.url);
+    const path = url.pathname;
 
-    if (path === '/' || path === '/index.html') {
-      const html = await assets['/index.html']()
-      return new Response(html, {
-        headers: { 'Content-Type': 'text/html; charset=utf-8' }
-      })
-    }
+    // 映射文件
+    const manifest = {
+      "/": "dist/index.html",
+      "/index.html": "dist/index.html",
+      "/assets/index-BP_gG1sn.css": "dist/assets/index-BP_gG1sn.css",
+      "/assets/index-DRAgb02N.js": "dist/assets/index-DRAgb02N.js",
+      "/assets/AboutPage-DQM0uoG4.js": "dist/assets/AboutPage-DQM0uoG4.js"
+    };
 
-    if (assets[path]) {
-      const content = await assets[path]()
-      const ext = path.split('.').pop()
-      const types = {
-        html: 'text/html', css: 'text/css', js: 'application/javascript',
-        png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp',
-        svg: 'image/svg+xml', ico: 'image/x-icon', json: 'application/json'
-      }
-      return new Response(content, {
-        headers: { 'Content-Type': types[ext] || 'application/octet-stream' }
-      })
-    }
+    const filePath = manifest[path] || manifest["/"];
 
-    return new Response(await assets['/index.html'](), {
-      headers: { 'Content-Type': 'text/html; charset=utf-8' }
-    })
+    // 读取文件
+    const file = await import(`./${filePath}`);
+    const content = file.default;
+
+    // 类型
+    const ext = filePath.split(".").pop();
+    const types = {
+      html: "text/html; charset=utf-8",
+      css: "text/css; charset=utf-8",
+      js: "application/javascript; charset=utf-8"
+    };
+
+    return new Response(content, {
+      headers: { "Content-Type": types[ext] || "text/html" }
+    });
   }
-}
+};
