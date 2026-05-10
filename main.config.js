@@ -22,9 +22,9 @@
     { name: '关于我', url: '/about' }
   ],
   blog: { //跳转博客相关配置
-    url: 'https://www.fqzlr.com',
-    rssFeed: 'https://www.fqzlr.com/rss.xml',
-    randomCoverApi: 'https://rand.xscnet.cn/mix' //随机封面API（可选，文章列表会使用这个接口获取随机封面图）
+    url: 'https://fqzlr.com',
+    rssFeed: 'https://fqzlr.com/rss.xml',
+    randomCoverApi: 'https://picsum.photos/800/450'//随机封面API（可选，文章列表会使用这个接口获取随机封面图）
   },
   github: {
     useGithubApi: true, // 是否使用 GitHub API 获取项目（如果为 false，则只显示 manualRepos 中的项目）
