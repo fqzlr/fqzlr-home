@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <div class="lockscreen" id="lockscreen" onclick="unlockTablet()">
+    <div class="lockscreen" id="lockscreen">
         <img class="lock-avatar" data-cfg-img="profile.avatar" alt="Avatar">
         <div class="lock-clock" id="lock-clock">00:00</div>
         <div class="lock-date" id="lock-date">日期</div>
@@ -32,7 +32,7 @@
     <div class="desktop-container">
 
         <div class="sidebar glass-panel">
-            <div class="sidebar-btn search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="sidebar-btn search"><i class="fa-solid fa-magnifying-glass"></i></div>
             <a data-cfg-href="links.bilibili" target="_blank" class="sidebar-btn" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a>
             <a data-cfg-href="links.github" target="_blank" class="sidebar-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
             <a data-cfg-href="links.qqGroup" target="_blank" class="sidebar-btn" title="QQ群"><i class="fa-brands fa-qq"></i></a>
@@ -215,7 +215,12 @@
         audio.addEventListener('ended', () => { if (!isLooping) document.getElementById('btn-next').click(); });
 
         /* ---------- 4. 锁屏 ---------- */
-        function unlockTablet() { document.getElementById('lockscreen').classList.add('unlocked'); }
+        function unlockTablet() {
+            lsEl.classList.add('unlocked');
+            if (rememberLS) {
+                try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (e) {}
+            }
+        }
 
         /* ---------- 5. 按时间解析问候语 ---------- */
         function resolveGreeting(hour) {
@@ -270,6 +275,8 @@
         }
 
         /* ---------- 启动 ---------- */
+        lsEl.addEventListener('click', unlockTablet);
+        document.querySelector('.sidebar-btn.search').addEventListener('click', toggleSearch);
         setInterval(updateClockAndCalendar, 1000);
         updateClockAndCalendar();
         buildCalendar();

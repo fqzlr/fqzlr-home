@@ -28,6 +28,15 @@ window.APP_CONFIG = {
         avatar: "https://q1.qlogo.cn/g?b=qq&nk=20447289&s=640",
     },
 
+    /* ============== 锁屏 ============== */
+    lockscreen: {
+        // true  = 解锁后记住，刷新页面不再出现锁屏（默认）
+        // false = 每次刷新都会重新显示锁屏
+        // 想再次显示锁屏？浏览器 DevTools → Application → Local Storage
+        //   → 删掉键名 fqzlr-unlocked 即可
+        remember: true,
+    },
+
     /* ============== 外部链接 ============== */
     // 下面这些键名会被 index.html 里 data-cfg-href / data-cfg-open 引用
     // 想新增链接？在下方加一行：键名: "URL"，然后在 HTML 的对应元素上写 data-cfg-href="links.键名"
