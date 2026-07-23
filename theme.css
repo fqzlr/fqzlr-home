@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Theme Variables
+   主题变量集中管理：调整主题色 / 玻璃态外观 / 文本颜色请改本文件
+   ========================================================================== */
+
+:root {
+    --accent-hue: 165;
+    --glass-bg: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.28);
+    --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+
+    /* 图片资源默认路径（JS 启动后会被 config.js 里的 assets 覆盖；
+       仅在 config.js 加载失败时作为兜底使用） */
+    --bg-wallpaper: url('images/wallpaper.png');
+    --bg-gallery1:  url('images/gallery1.jpg');
+    --bg-gallery2:  url('images/gallery2.jpg');
+    --bg-gallery3:  url('images/gallery3.jpg');
+}

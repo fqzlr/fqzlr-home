@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fqzlr - 个人主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://fqzlr.com/favicon/favicon.ico">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="style.css">
+    <!--
+        站点说明
+        --------
+        普通用户只需要编辑 config.js 即可改：用户名、头像、各平台链接、
+        问候语、格言、音乐播放列表、图片路径。修改保存后刷新浏览器即可。
+
+        index.html / theme.css / style.css / 下面的 <script> 是页面骨架与
+        运行逻辑，一般情况下不用动。
+    -->
+    <script src="config.js"></script>
+</head>
+<body>
+
+    <div class="lockscreen" id="lockscreen" onclick="unlockTablet()">
+        <img class="lock-avatar" data-cfg-img="profile.avatar" alt="Avatar">
+        <div class="lock-clock" id="lock-clock">00:00</div>
+        <div class="lock-date" id="lock-date">日期</div>
+        <div class="lock-hint">点击任意位置解锁</div>
+    </div>
+
+    <div class="desktop-container">
+
+        <div class="sidebar glass-panel">
+            <div class="sidebar-btn search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <a data-cfg-href="links.bilibili" target="_blank" class="sidebar-btn" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a>
+            <a data-cfg-href="links.github" target="_blank" class="sidebar-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a data-cfg-href="links.qqGroup" target="_blank" class="sidebar-btn" title="QQ群"><i class="fa-brands fa-qq"></i></a>
+            <a data-cfg-href="links.email" class="sidebar-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a data-cfg-href="links.rss" target="_blank" class="sidebar-btn" title="RSS"><i class="fa-solid fa-rss"></i></a>
+        </div>
+
+        <div class="main-board glass-panel">
+
+            <img class="character-bg-inside" data-cfg-img="assets.character" alt="Character" >
+
+            <div class="left-col">
+                <div class="clock-widget">
+                    <div class="time" id="live-clock">00:00</div>
+                    <div class="date" id="live-date">日期</div>
+                </div>
+
+                <div class="calendar-widget">
+                    <div class="calendar-header" id="calendar-month">月份</div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <span class="day-name">日</span><span class="day-name">一</span><span class="day-name">二</span><span class="day-name">三</span><span class="day-name">四</span><span class="day-name">五</span><span class="day-name">六</span>
+                    </div>
+                </div>
+
+                <div class="music-player">
+                    <audio id="main-audio" src=""></audio>
+                    <div class="album-art" id="player-art"></div>
+                    <div class="track-info">
+                        <div class="track-title" id="track-title">加载中...</div>
+                        <div class="player-controls">
+                            <i class="fa-solid fa-repeat" id="btn-repeat"></i>
+                            <i class="fa-solid fa-backward-step" id="btn-prev"></i>
+                            <i class="fa-solid fa-play" id="play-btn"></i>
+                            <i class="fa-solid fa-forward-step" id="btn-next"></i>
+                            <i class="fa-solid fa-heart" id="btn-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-spacer"></div>
+
+            <div class="right-col">
+                <div class="header-right">
+                    <a data-cfg-href="links.blog" target="_blank" class="mini-icon-btn" title="博客">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <div class="user-tag">
+                        <span data-cfg-text="profile.name">用户名</span>
+                        <div class="user-avatar" data-cfg-bg="profile.avatar"></div>
+                    </div>
+                </div>
+
+                <div class="greeting" id="dynamic-greeting">你好！</div>
+                <div class="greeting-sub" data-cfg-text="greetings.sub">副标题</div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item item-large" data-cfg-open="links.blog"></div>
+                    <div class="gallery-item item-top" data-cfg-open="links.posts"></div>
+                    <div class="gallery-item item-bottom" data-cfg-open="links.moments">
+                        <i class="fa-solid fa-images" style="color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5);"></i>
+                    </div>
+                </div>
+
+                <div class="quotes-widget">
+                    <div class="quotes-header">
+                        <i class="fa-solid fa-quote-left"></i> 今日格言
+                    </div>
+                    <div class="quotes-text" data-cfg-text="quote.text">格言内容</div>
+                    <div class="quotes-author" data-cfg-text="quote.author">— 作者</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bottom-dock glass-panel">
+        <a data-cfg-href="links.blog" target="_blank" class="dock-icon icon-blog" title="博客">
+            <i class="fa-solid fa-house"></i>
+        </a>
+        <a data-cfg-href="links.bilibili" target="_blank" class="dock-icon icon-bilibili" title="B站">
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+        <a data-cfg-href="links.github" target="_blank" class="dock-icon icon-github" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <a data-cfg-href="links.qqGroup" target="_blank" class="dock-icon icon-qq" title="QQ群">
+            <i class="fa-brands fa-qq"></i>
+        </a>
+        <a data-cfg-href="links.email" class="dock-icon icon-email" title="邮箱">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a data-cfg-href="links.rss" target="_blank" class="dock-icon icon-rss" title="RSS">
+            <i class="fa-solid fa-rss"></i>
+        </a>
+    </div>
+
+    <script>
+    /* ============================================================
+     *  页面运行逻辑
+     * ============================================================
+     *  本脚本只负责"读 config.js → 把数据填进页面 + 绑定交互"，
+     *  普通用户不需要修改这里。
+     *  想改内容请编辑 config.js。
+     * ============================================================ */
+    (function () {
+        const CFG = window.APP_CONFIG || {};
+        const byPath = (path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), CFG);
+
+        /* ---------- 1. 把 config 里的文本 / 链接 / 图片塞进 DOM ---------- */
+        const applyAll = () => {
+            document.querySelectorAll('[data-cfg-text]').forEach(el => {
+                const v = byPath(el.dataset.cfgText);
+                if (v != null) el.textContent = v;
+            });
+            document.querySelectorAll('[data-cfg-href]').forEach(el => {
+                const v = byPath(el.dataset.cfgHref);
+                if (v != null) el.href = v;
+            });
+            document.querySelectorAll('[data-cfg-img]').forEach(el => {
+                const v = byPath(el.dataset.cfgImg);
+                if (v != null) el.src = v;
+            });
+            document.querySelectorAll('[data-cfg-bg]').forEach(el => {
+                const v = byPath(el.dataset.cfgBg);
+                if (v != null) el.style.backgroundImage = `url('${v}')`;
+            });
+            document.querySelectorAll('[data-cfg-open]').forEach(el => {
+                const v = byPath(el.dataset.cfgOpen);
+                if (v != null) el.onclick = () => window.open(v, '_blank');
+            });
+        };
+        applyAll();
+
+        /* ---------- 2. 背景图：写入 CSS 变量，由 style.css 引用 ---------- */
+        const rootStyle = document.documentElement.style;
+        const setBgVar = (cssVar, cfgPath) => {
+            const v = byPath(cfgPath);
+            if (v != null) rootStyle.setProperty(cssVar, `url('${v}')`);
+        };
+        setBgVar('--bg-wallpaper', 'assets.wallpaper');
+        setBgVar('--bg-gallery1',  'assets.gallery1');
+        setBgVar('--bg-gallery2',  'assets.gallery2');
+        setBgVar('--bg-gallery3',  'assets.gallery3');
+
+        /* ---------- 3. 音乐播放器 ---------- */
+        const playlist = CFG.playlist || [];
+        let currentTrackIndex = 0;
+        let isLooping = false;
+
+        const audio     = document.getElementById('main-audio');
+        const playBtn   = document.getElementById('play-btn');
+        const trackTitle= document.getElementById('track-title');
+        const playerArt = document.getElementById('player-art');
+        const btnRepeat = document.getElementById('btn-repeat');
+        const btnHeart  = document.getElementById('btn-heart');
+
+        function loadTrack(index) {
+            const track = playlist[index];
+            if (!track) return;
+            audio.src = track.url;
+            trackTitle.textContent = track.title;
+            playerArt.style.backgroundImage = `url('${track.art}')`;
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().then(() => playBtn.classList.replace('fa-play', 'fa-pause')).catch(err => console.log(err));
+            } else {
+                audio.pause();
+                playBtn.classList.replace('fa-pause', 'fa-play');
+            }
+        }
+
+        playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
+        document.getElementById('btn-next').addEventListener('click', (e) => { e.stopPropagation(); currentTrackIndex = (currentTrackIndex + 1) % playlist.length; loadTrack(currentTrackIndex); togglePlay(); });
+        document.getElementById('btn-prev').addEventListener('click', (e) => { e.stopPropagation(); currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length; loadTrack(currentTrackIndex); togglePlay(); });
+        btnRepeat.addEventListener('click', (e) => { e.stopPropagation(); isLooping = !isLooping; audio.loop = isLooping; btnRepeat.classList.toggle('active-btn', isLooping); });
+        btnHeart .addEventListener('click', (e) => { e.stopPropagation(); btnHeart.classList.toggle('liked'); });
+        audio.addEventListener('ended', () => { if (!isLooping) document.getElementById('btn-next').click(); });
+
+        /* ---------- 4. 锁屏 ---------- */
+        function unlockTablet() { document.getElementById('lockscreen').classList.add('unlocked'); }
+
+        /* ---------- 5. 按时间解析问候语 ---------- */
+        function resolveGreeting(hour) {
+            const rules = (CFG.greetings && CFG.greetings.timeBased) || [];
+            const rule = rules.find(g => {
+                if (g.from < g.to) return hour >= g.from && hour < g.to;
+                return hour >= g.from || hour < g.to; // 跨午夜段
+            });
+            if (!rule) return '';
+            const name = (CFG.profile && CFG.profile.name) || '';
+            return rule.text.replace('{name}', name);
+        }
+
+        /* ---------- 6. 时钟 + 日历 ---------- */
+        function updateClockAndCalendar() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const hourInt = now.getHours();
+
+            document.getElementById('live-clock').textContent = `${hours}:${minutes}`;
+            document.getElementById('lock-clock').textContent = `${hours}:${minutes}`;
+            document.getElementById('live-date').textContent = now.toLocaleDateString('zh-CN', { weekday: 'long', month: '2-digit', day: '2-digit' });
+            document.getElementById('lock-date').textContent = now.toLocaleDateString('zh-CN', { weekday: 'long', month: 'long', day: 'numeric' });
+
+            document.getElementById('dynamic-greeting').textContent = resolveGreeting(hourInt);
+        }
+
+        function buildCalendar() {
+            const now = new Date();
+            const monthNames = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+            document.getElementById('calendar-month').textContent = monthNames[now.getMonth()];
+            const grid = document.getElementById('calendar-grid');
+            const firstDayIndex = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const totalDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayIndex; i++) grid.appendChild(document.createElement('span'));
+            for (let day = 1; day <= totalDays; day++) {
+                const daySpan = document.createElement('span');
+                daySpan.textContent = day;
+                if (day === now.getDate()) daySpan.classList.add('active');
+                grid.appendChild(daySpan);
+            }
+        }
+
+        /* ---------- 7. 搜索 ---------- */
+        function toggleSearch() {
+            const query = prompt("搜索内容：");
+            if (!query) return;
+            const tmpl = (CFG.search && CFG.search.url) || "https://www.google.com/search?q={query}";
+            window.open(tmpl.replace('{query}', encodeURIComponent(query)), '_blank');
+        }
+
+        /* ---------- 启动 ---------- */
+        setInterval(updateClockAndCalendar, 1000);
+        updateClockAndCalendar();
+        buildCalendar();
+        loadTrack(currentTrackIndex);
+    })();
+    </script>
+</body>
+</html>
