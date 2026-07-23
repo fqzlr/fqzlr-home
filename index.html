@@ -142,6 +142,17 @@
         const CFG = window.APP_CONFIG || {};
         const byPath = (path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), CFG);
 
+        /* ---------- 0. 锁屏状态记忆 ---------- */
+        // 若 config.lockscreen.remember = true 且浏览器记住了解锁状态，则直接隐藏锁屏
+        const UNLOCK_KEY = 'fqzlr-unlocked';
+        const rememberLS = !CFG.lockscreen || CFG.lockscreen.remember !== false;
+        const lsEl       = document.getElementById('lockscreen');
+        if (rememberLS) {
+            try {
+                if (localStorage.getItem(UNLOCK_KEY) === '1') lsEl.style.display = 'none';
+            } catch (e) { /* localStorage 不可用时静默忽略 */ }
+        }
+
         /* ---------- 1. 把 config 里的文本 / 链接 / 图片塞进 DOM ---------- */
         const applyAll = () => {
             document.querySelectorAll('[data-cfg-text]').forEach(el => {
